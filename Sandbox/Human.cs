@@ -7,12 +7,17 @@ namespace Sandbox
 {
     class Human
     {
-        private bool maleOrFemale;
-        private String eyeColor;
-        private String hairColor;
-        private int heightCategory;
+        public enum Gender { man, woman };
+        public enum EyeColor { green, blue, brown, grey };
+        public enum HairColor { white, lightBlond, mediumBlond, darkBlond, brown, black, red, bald };
+        public enum HeightCategory { veryShort, shortish, medium, tallish, veryTall };
 
-        public Human(bool maleOrFemale, String eyeColor, String hairColor, int heightCategory)
+        private Gender maleOrFemale;
+        private EyeColor eyeColor;
+        private HairColor hairColor;
+        private HeightCategory heightCategory;
+
+        public Human(Gender maleOrFemale, EyeColor eyeColor, HairColor hairColor, HeightCategory heightCategory)
         {
             this.maleOrFemale = maleOrFemale;
             this.eyeColor = eyeColor;
@@ -22,7 +27,7 @@ namespace Sandbox
 
         public String GetDescription()
         {
-            String description = "You got a " + GetGenderDescription();
+            String description = "You got a " + maleOrFemale;
             description = description + ", with " + eyeColor + " eyes";
             description = description + ", " + hairColor + " hair";
             description = description + ", who is " + GetHeightDescription();
@@ -30,34 +35,22 @@ namespace Sandbox
             return description;
         }
 
-        public String GetGenderDescription()
-        {
-            if (maleOrFemale)
-            {
-                return "man";
-            }
-            else
-            {
-                return "woman";
-            }
-        }
-
         public String GetHeightDescription()
         {
             switch (heightCategory)
             {
-                case 0:
+                case HeightCategory.veryShort:
                     return "Very short";
-                case 1:
+                case HeightCategory.shortish:
                     return "Short";
-                case 2:
+                case HeightCategory.medium:
                     return "Medium height";
-                case 3:
+                case HeightCategory.tallish:
                     return "Tall";
-                case 4:
+                case HeightCategory.veryTall:
                     return "Very tall";
                 default:
-                    return "Unknown height";
+                    return "Unknown height"; // Can we ever reach this point...?
             }
         }
     }
